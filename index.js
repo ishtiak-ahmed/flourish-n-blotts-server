@@ -5,7 +5,7 @@ require('dotenv').config()
 // const DB_USER = 'flourishblottsmanager'
 // const DB_PASS = 'alohomora'
 // const database = 'flourishblotts'
-console.log({ process.env.DB_PASS })
+// console.log({ process.env.DB_PASS })
 
 app.get('/', (req, res) => {
     res.send('Hello Wizards and Witches!')
