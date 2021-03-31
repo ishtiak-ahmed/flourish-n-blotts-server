@@ -4,6 +4,7 @@
   "description": "This is the server code for flourish and blotts book shop",
   "main": "index.js",
   "scripts": {
+    "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ishtiak Ahmed",
