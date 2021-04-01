@@ -60,6 +60,26 @@ client.connect(err => {
                 res.send(document)
             })
     })
+
+    // Order list
+    const orderlist = client.db('flourishblotts').collection("orderlist");
+    // Add to cart or order list
+    app.post('/addorder', (req, res) => {
+        const newItem = req.body
+        orderlist.insertOne(newItem)
+            .then(result => {
+                res.send(result.insertedCount > 0)
+            })
+    })
+    // Load Order list from database for user
+    app.post('/orders', (req, res) => {
+        console.log(req.body)
+        const orders = orderlist.find({ buyer: req.body.buyer })
+            .toArray((err, documents) => {
+                res.send(documents)
+            });
+    })
+
 })
 
 

@@ -1,3 +1,7 @@
-# Flourish And Blotts Server
+# Flourish And Blotts
 
-### This is the server or back end code of my Flourish And Blotts Projects.
+## We have all kinds of books for wizards and witches
+
+## Buy or Visit our [Shop](https://flourish-and-blotts.web.app)
+
+### We are now Owl Delivering all over the world.
