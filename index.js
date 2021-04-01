@@ -18,8 +18,7 @@ app.get('/', (req, res) => {
 })
 // Mongodb connection
 const MongoClient = require('mongodb').MongoClient;
-const uri = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.xzynl.mongodb.net/flourishblotts?retryWrites=true&w=majority`;
-// const uri = `mongodb+srv://testuser:test1357@cluster0.xzynl.mongodb.net/flourishblotts?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.xzynl.mongodb.net/${DATABASE}?retryWrites=true&w=majority`;
 console.log(uri)
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
@@ -31,10 +30,8 @@ client.connect(err => {
     // Post products
     app.post('/addBook', (req, res) => {
         const newBook = req.body
-        console.log(newBook)
         booksCollection.insertOne(newBook)
             .then(result => {
-                console.log('inserted item ', result.insertedCount)
                 res.send(result.insertedCount > 0)
             })
     })
@@ -44,11 +41,6 @@ client.connect(err => {
             .toArray((err, documents) => {
                 res.send(documents)
             });
-        console.log(books)
-        // books.forEach(prod => {
-        //     const product = (JSON.stringify(prod))
-        //     console.log(product)
-        // })
     })
 })
 
