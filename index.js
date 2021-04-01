@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 })
 // Mongodb connection
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID
 const uri = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.xzynl.mongodb.net/${DATABASE}?retryWrites=true&w=majority`;
 console.log(uri)
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -36,18 +37,30 @@ client.connect(err => {
             })
     })
 
+    // Read or Load Products From Database
     app.get('/books', (req, res) => {
         const books = booksCollection.find({})
             .toArray((err, documents) => {
                 res.send(documents)
             });
     })
+
+    // Delete Products
+    app.delete('/delete/:id', (req, res) => {
+        booksCollection.deleteOne({ _id: ObjectID(req.params.id) })
+            .then((err, result) => {
+                console.log(result.deletedCount)
+            })
+    })
+
+    // Find one Produdct
+    app.get('/addtocart/:id', (req, res) => {
+        booksCollection.find({ _id: ObjectID(req.params.id) })
+            .toArray((err, document) => {
+                res.send(document)
+            })
+    })
 })
-
-
-
-
-
 
 
 app.listen(PORT, () => {
